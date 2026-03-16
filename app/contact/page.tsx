@@ -1,3 +1,5 @@
+"use client";
+
 export default function ContactPage() {
     return (
         <div className="w-full py-20 px-6 md:px-12 bg-slate-50 min-h-screen">
@@ -21,21 +23,21 @@ export default function ContactPage() {
                                     <span className="text-[#00d061] text-xl">📍</span>
                                     <div>
                                         <p className="font-medium text-slate-900">Adres</p>
-                                        <p className="text-sm">[Açık Adres Bilgisi]<br/>[İlçe, İl, Posta Kodu]</p>
+                                        <p className="text-sm">Cumhuriyet Mahallesi<br/>Mehmet Tevfik Çamcı Sokak<br/>Merkez / Uşak</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <span className="text-[#00d061] text-xl">📞</span>
                                     <div>
                                         <p className="font-medium text-slate-900">Bizi Arayın</p>
-                                        <p className="text-sm">[Telefon Numarası]</p>
+                                        <p className="text-sm">0543 210 02 76</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <span className="text-[#00d061] text-xl">✉️</span>
                                     <div>
                                         <p className="font-medium text-slate-900">E-posta</p>
-                                        <p className="text-sm">[E-posta Adresi]</p>
+                                        <p className="text-sm">iletisim@fztveyisbozkurt.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +68,7 @@ export default function ContactPage() {
 
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Konu</label>
-                                <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all bg-white">
+                                <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all bg-white cursor-pointer">
                                     <option>İlk Danışmanlık</option>
                                     <option>Randevu İptali / Değişikliği</option>
                                     <option>Genel Bilgi</option>
@@ -84,7 +86,7 @@ export default function ContactPage() {
 
                             <button
                                 type="button"
-                                className="w-full bg-[#00d061] hover:bg-[#00b353] text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                                className="w-full bg-[#00d061] hover:bg-[#00b353] text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md"
                             >
                                 <span>Mesajı Gönder</span>
                                 <span className="text-xl">→</span>

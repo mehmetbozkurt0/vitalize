@@ -1,27 +1,26 @@
 import Link from "next/link";
 
 export default function Services() {
-    const services = [
-        {
-            title: "Ortopedik Rehabilitasyon",
-            description: "Kemik, eklem ve kas rahatsızlıkları için ameliyat öncesi ve sonrası uzman iyileşme programları."
-        },
-        {
-            title: "Spor Yaralanmaları",
-            description: "Sporcuların gelişmiş iyileşme protokolleri aracılığıyla en yüksek performansa güvenle dönmeleri için özel tedavi."
-        },
-        {
-            title: "Pediatrik Terapi",
-            description: "Çocukların gelişimsel büyümesine ve fiziksel hareketliliğine odaklanan nazik ve etkili terapi."
-        },
+    const mainServices = [
         {
             title: "Fizyoterapi",
-            description: "Çocukların gelişimsel büyümesine ve fiziksel hareketliliğine odaklanan nazik ve etkili terapi."
+            description: "Kas, eklem ve sinir sistemi kaynaklı ağrıları azaltmak ve hareket kabiliyetini artırmak için bilimsel yöntemlerle kişiye özel fizyoterapi programları uygulanır.",
+            icon: "🩺"
+        },
+        {
+            title: "Manuel Terapi",
+            description: "Elle yapılan özel tekniklerle kas gerginliği, eklem sertliği ve duruş bozuklukları giderilerek doğal iyileşme süreci desteklenir.",
+            icon: "👐"
+        },
+        {
+            title: "Ortopedik Rehabilitasyon",
+            description: "Ameliyat sonrası veya yaralanma sonrası süreçlerde eklem ve kas fonksiyonlarını geri kazandırmaya yönelik egzersiz ve tedavi programları uygulanır.",
+            icon: "🦴"
         }
     ];
 
     return (
-        <section className="w-full bg-white py-20 px-6 md:px-12">
+        <section className="w-full bg-slate-50 py-20 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 {/* Üst Kısım: Başlık ve Link */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
@@ -43,13 +42,12 @@ export default function Services() {
 
                 {/* Hizmet Kartları */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {services.map((service, index) => (
+                    {mainServices.map((service, index) => (
                         <div key={index} className="group cursor-pointer">
-                            {/* Görsel Alanı (Şimdilik Yer Tutucu) */}
-                            <div className="w-full aspect-[4/3] bg-slate-100 rounded-2xl mb-6 overflow-hidden relative">
-                                {/* İleride buraya <Image /> etiketi ile gerçek resimler gelecek */}
-                                <div className="absolute inset-0 bg-slate-200 group-hover:scale-105 transition-transform duration-500 flex items-center justify-center text-slate-400 font-medium">
-                                    [Hizmet Görseli Gelecek]
+                            {/* İkon Alanı */}
+                            <div className="w-full aspect-[4/3] bg-slate-100 rounded-3xl mb-6 overflow-hidden relative">
+                                <div className="absolute inset-0 bg-slate-50 group-hover:scale-105 transition-transform duration-500 flex items-center justify-center text-6xl">
+                                    {service.icon}
                                 </div>
                             </div>
 

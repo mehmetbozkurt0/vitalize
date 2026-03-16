@@ -28,7 +28,7 @@ export default function About() {
                             <li>Spor Yaralanmaları ve Spora Dönüş</li>
                         </ul>
 
-                        <Link href="/randevu" className="text-[#00d061] font-semibold hover:underline">
+                        <Link href="/booking" className="text-[#00d061] font-semibold hover:underline transition-colors">
                             Hemen bir değerlendirme randevusu alın →
                         </Link>
                     </div>

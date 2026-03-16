@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8 px-6 md:px-12 lg:px-24 mt-20">
+        <footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8 px-6 md:px-12 lg:px-24 mt-0">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 {/* Sol Sütun - Marka */}
                 <div className="col-span-1 md:col-span-1">

@@ -2,7 +2,7 @@ import BookingForm from "@/components/booking_form";
 
 export default function BookingPage() {
     return (
-        <div className="w-full py-12 px-6 md:px-12 bg-slate-50 min-h-screen">
+        <div className="w-full py-12 px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
 
                 {/* Üst Başlık */}

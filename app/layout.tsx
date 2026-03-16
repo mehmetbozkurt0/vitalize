@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar"; // Navbar'ı içe aktar
-import Footer from "@/components/footer"; // Footer'ı içe aktar
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +18,16 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="tr">
-        <body className={`${inter.className} bg-white text-slate-900`}>
-        <Navbar /> {/* Sayfanın en üstünde Navbar */}
-        <main className="min-h-screen">
-            {children} {/* Senin sayfa içeriklerin buraya gelecek */}
+        {/* flex, flex-col ve min-h-screen ile footer her zaman en altta kalır */}
+        <body className={`${inter.className} bg-slate-50 text-slate-900 flex flex-col min-h-screen`}>
+        <Navbar />
+
+        {/* flex-grow ile içerik ekranı kaplar, renk kesilmeleri önlenir */}
+        <main className="flex-grow w-full">
+            {children}
         </main>
-        <Footer /> {/* Sayfanın en altında Footer */}
+
+        <Footer />
         </body>
         </html>
     );

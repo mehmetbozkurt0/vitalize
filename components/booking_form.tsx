@@ -11,7 +11,7 @@ export default function BookingForm() {
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
 
-    // Dolu Saatleri Tutacağımız State (YENİ)
+    // Dolu Saatleri Tutacağımız State
     const [bookedTimes, setBookedTimes] = useState<string[]>([]);
     const [isLoadingTimes, setIsLoadingTimes] = useState(false);
 
@@ -26,13 +26,12 @@ export default function BookingForm() {
 
     const timeSlots = ["09:00", "10:00", "11:00", "13:30", "14:30", "15:30", "16:30", "17:30"];
 
-    // YENİ EKLENEN KISIM: Tarih her değiştiğinde Supabase'den o günün dolu saatlerini çek
+    // Tarih her değiştiğinde Supabase'den o günün dolu saatlerini çek
     useEffect(() => {
         if (!selectedDate) return;
 
         const fetchBookedTimes = async () => {
             setIsLoadingTimes(true);
-            // Seçilen saati sıfırla ki eski günün saati kalmasın
             setSelectedTime("");
 
             try {
@@ -40,11 +39,10 @@ export default function BookingForm() {
                     .from('appointments')
                     .select('appointment_time')
                     .eq('appointment_date', selectedDate)
-                    .neq('status', 'iptal'); // İptal edilen randevuların saatlerini dolu sayma
+                    .neq('status', 'iptal');
 
                 if (error) throw error;
 
-                // Gelen verideki saatleri bir diziye (array) dönüştür
                 if (data) {
                     const times = data.map(appt => appt.appointment_time);
                     setBookedTimes(times);
@@ -157,13 +155,18 @@ export default function BookingForm() {
                             <h3 className="font-bold text-xl text-slate-900 mb-6 flex items-center gap-3"><span className="bg-[#e5fbf0] text-[#00d061] w-10 h-10 rounded-lg flex items-center justify-center text-xl">📋</span> Hizmet Seçimi</h3>
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Uygulanacak Tedavi</label>
+
+                                {/* YENİLENEN DROPDOWN MENÜSÜ */}
                                 <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] bg-white cursor-pointer">
                                     <option value="">Lütfen bir hizmet seçin</option>
+                                    <option value="Fizyoterapi">Fizyoterapi</option>
                                     <option value="Manuel Terapi">Manuel Terapi</option>
-                                    <option value="Elektroterapi">Elektroterapi</option>
-                                    <option value="Klinik Pilates">Klinik Pilates</option>
                                     <option value="Ortopedik Rehabilitasyon">Ortopedik Rehabilitasyon</option>
+                                    <option value="Nörolojik Rehabilitasyon">Nörolojik Rehabilitasyon</option>
+                                    <option value="Fitness">Fitness</option>
+                                    <option value="Pilates">Pilates</option>
                                 </select>
+
                             </div>
                             <div className="mt-8 flex justify-end">
                                 <button onClick={() => setStep(2)} disabled={!selectedService} className={`px-10 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2 ${selectedService ? "bg-[#00d061] hover:bg-[#00b353] text-white shadow-md" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}>
@@ -187,17 +190,15 @@ export default function BookingForm() {
                                     </label>
                                     <div className="grid grid-cols-2 gap-3">
                                         {timeSlots.map((time, idx) => {
-                                            // YENİ EKLENEN KISIM: Bu saat veritabanından gelen dolu saatler dizisinde var mı?
                                             const isBooked = bookedTimes.includes(time);
-
                                             return (
                                                 <button
                                                     key={idx}
                                                     onClick={() => setSelectedTime(time)}
-                                                    disabled={isBooked || !selectedDate} // Doluysa veya tarih seçilmediyse butonu kilitle
+                                                    disabled={isBooked || !selectedDate}
                                                     className={`py-2 rounded-lg border text-sm font-medium transition-colors ${
                                                         isBooked
-                                                            ? "bg-slate-100 border-slate-200 text-slate-400 line-through cursor-not-allowed" // Dolu olan saatin tasarımı
+                                                            ? "bg-slate-100 border-slate-200 text-slate-400 line-through cursor-not-allowed"
                                                             : selectedTime === time
                                                                 ? "bg-[#e5fbf0] border-[#00d061] text-[#00d061]"
                                                                 : "border-slate-200 text-slate-600 hover:border-[#00d061]"
