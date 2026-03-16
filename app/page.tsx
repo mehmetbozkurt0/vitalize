@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Services from "@/components/services";
+import Image from "next/image";
+
 
 export default function HomePage() {
   return (
@@ -33,9 +35,14 @@ export default function HomePage() {
             {/* Sağ Taraf - Görsel */}
             <div className="flex-1 relative w-full max-w-[500px] lg:max-w-none mx-auto">
               <div className="aspect-square bg-slate-100 rounded-3xl overflow-hidden border-8 border-white shadow-2xl relative">
-                <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                  [Klinik / Uygulama Görseli]
-                </div>
+
+                <Image
+                    src="/images/klinik.jpeg"
+                    alt="Özel Sağlık Meslek Hizmet Birimi Klinik Görseli"
+                    fill
+                    className="object-cover"
+                    priority
+                />
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#00d061]/10 rounded-full -z-10 animate-pulse"></div>
               </div>
             </div>
