@@ -1,18 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Şimdilik test amaçlı API anahtarını buraya koyacağız, sonra .env dosyasına taşıyacağız
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
     try {
-        // Formdan gelecek olan bilgileri yakalıyoruz
         const { firstName, lastName, phone, service, date, time } = await request.json();
 
-        // Mail gönderme işlemi
         const { data, error } = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>', // Resend'in varsayılan test göndericisi
-            to: ['mehmet.64.b@gmail.com'], // Veyis Bey'in veya senin test mail adresini buraya yazacağız
+            from: 'Acme <onboarding@resend.dev>',
+            to: ['sauron4567@gmail.com', 'veyisibozkurt2@gmail.com'] ,
             subject: '🚨 Yeni Randevu Talebi!',
             html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333;">
