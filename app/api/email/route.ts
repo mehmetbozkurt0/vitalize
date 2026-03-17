@@ -8,7 +8,7 @@ export async function POST(request: Request) {
         const { firstName, lastName, phone, service, date, time } = await request.json();
 
         const { data, error } = await resend.emails.send({
-            from: 'FizyoCenter Randevu Sistemi',
+            from: '"FizyoCenter Randevu Sistemi" <iletisim@fztveyisbozkurt.com>',
             to: ['mehmet.64.b@gmail.com', 'veyisbozkurt2@gmail.com'] ,
             subject: '🚨 Yeni Randevu Talebi!',
             html: `
