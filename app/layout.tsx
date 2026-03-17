@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Script from "next/script";
+import WhatsAppButton from "@/components/whatsapp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,13 @@ export default function RootLayout({
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
                         gtag('config', 'AW-788816291');
+                        
+                        /* SAYFA GÖRÜNTÜLEME DÖNÜŞÜMÜ */
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-788816291/JxlzCMPuoa4bEKPDkfgC',
+                            'value': 1.0,
+                            'currency': 'TRY'
+                        });
                     `,
                 }}
             />
@@ -45,6 +53,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
+        <WhatsAppButton />
         </body>
         </html>
     );

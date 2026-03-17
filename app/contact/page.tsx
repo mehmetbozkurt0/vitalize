@@ -10,6 +10,19 @@ export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const handlePhoneClick = () => {
+        if (typeof window !== "undefined") {
+            const win = window as unknown as { gtag: (cmd: string, action: string, params: object) => void };
+            if (win.gtag) {
+                win.gtag('event', 'conversion', {
+                    'send_to': 'AW-788816291/tyUfCMbuoa4bEKPDkfgC',
+                    'value': 1.0,
+                    'currency': 'TRY'
+                });
+            }
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -66,7 +79,13 @@ export default function ContactPage() {
                                     <span className="text-[#00d061] text-xl">📞</span>
                                     <div>
                                         <p className="font-medium text-slate-900">Bizi Arayın</p>
-                                        <p className="text-sm">0543 210 02 76</p>
+                                        <a
+                                            href="tel:05432100276"
+                                            onClick={handlePhoneClick}
+                                            className="text-sm font-bold text-slate-900 hover:text-[#00d061] transition-colors"
+                                        >
+                                            0543 210 02 76
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
