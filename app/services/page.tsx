@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ServicesPage() {
@@ -5,32 +6,38 @@ export default function ServicesPage() {
         {
             name: "Fizyoterapi",
             description: "Kas, eklem ve sinir sistemi kaynaklı ağrıları azaltmak ve hareket kabiliyetini artırmak için bilimsel yöntemlerle kişiye özel fizyoterapi programları uygulanır.",
-            badge: "TEDAVİ"
+            badge: "TEDAVİ",
+            image: "/images/fizyo.jpg"
         },
         {
             name: "Manuel Terapi",
             description: "Elle yapılan özel tekniklerle kas gerginliği, eklem sertliği ve duruş bozuklukları giderilerek doğal iyileşme süreci desteklenir.",
-            badge: "MANUEL"
+            badge: "MANUEL",
+            image: "/images/manuel-terapi.jpg"
         },
         {
             name: "Ortopedik Rehabilitasyon",
             description: "Ameliyat sonrası veya yaralanma sonrası süreçlerde eklem ve kas fonksiyonlarını geri kazandırmaya yönelik egzersiz ve tedavi programları uygulanır.",
-            badge: "REHABİLİTASYON"
+            badge: "REHABİLİTASYON",
+            image: "/images/orto.jpg"
         },
         {
             name: "Nörolojik Rehabilitasyon",
             description: "Felç, sinir hasarı veya nörolojik rahatsızlıklar sonrası hareket kabiliyetini artırmak için özel egzersiz ve terapi yöntemleri uygulanır.",
-            badge: "NÖROLOJİ"
+            badge: "NÖROLOJİ",
+            image: "/images/neuro.jpg"
         },
         {
             name: "Fitness",
             description: "Uzman eşliğinde hazırlanan antrenman programlarıyla kas gücü, dayanıklılık ve genel vücut sağlığı geliştirilir.",
-            badge: "SAĞLIKLI YAŞAM"
+            badge: "SAĞLIKLI YAŞAM",
+            image: "/images/fitness.jpg"
         },
         {
             name: "Pilates",
             description: "Denge, esneklik ve postür odaklı egzersizlerle hem bedensel farkındalık hem de core kas gücü artırılır.",
-            badge: "EGZERSİZ"
+            badge: "EGZERSİZ",
+            image: "/images/pilates.jpg"
         }
     ];
 
@@ -46,10 +53,16 @@ export default function ServicesPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {treatments.map((treatment, index) => (
-                        <div key={index} className="bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 hover:shadow-xl hover:bg-white transition-all duration-300">
-                            {/* Görsel Alanı */}
-                            <div className="h-48 bg-slate-200 w-full flex items-center justify-center text-slate-400">
-                                [Görsel Alanı]
+                        <div key={index} className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-xl transition-all duration-300">
+
+                            {/* YENİLENEN GÖRSEL ALANI */}
+                            <div className="h-56 w-full relative bg-slate-200">
+                                <Image
+                                    src={treatment.image}
+                                    alt={`${treatment.name} Hizmeti - Özel SMHB`}
+                                    fill
+                                    className="object-cover transition-transform duration-700 hover:scale-105"
+                                />
                             </div>
 
                             {/* İçerik Alanı */}

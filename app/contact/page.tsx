@@ -1,11 +1,47 @@
 "use client";
 
+import { useState } from "react";
+
 export default function ContactPage() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [subject, setSubject] = useState("İlk Danışmanlık");
+    const [message, setMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, subject, message }),
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+                setName("");
+                setEmail("");
+                setMessage("");
+                setSubject("İlk Danışmanlık");
+            } else {
+                alert("Mesaj gönderilirken bir sorun oluştu.");
+            }
+        } catch (error) {
+            console.error("Mail gönderme hatası:", error);
+            alert("Bir hata oluştu, lütfen daha sonra tekrar deneyin.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="w-full py-20 px-6 md:px-12 bg-slate-50 min-h-screen">
             <div className="max-w-7xl mx-auto">
 
-                {/* Üst Başlık Kısmı */}
                 <div className="mb-12">
                     <h1 className="text-4xl font-bold text-slate-900 mb-4">İletişime Geçin</h1>
                     <p className="text-slate-500 max-w-xl text-lg">
@@ -46,52 +82,77 @@ export default function ContactPage() {
 
                     {/* Sağ Kolon - İletişim Formu */}
                     <div className="w-full lg:w-2/3 bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100">
-                        <form className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">Ad Soyad</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Adınız ve Soyadınız"
-                                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all"
-                                    />
+                        {isSubmitted ? (
+                            <div className="flex flex-col items-center justify-center h-full text-center py-10 animate-in fade-in zoom-in duration-500">
+                                <div className="w-20 h-20 bg-[#e5fbf0] text-[#00d061] rounded-full flex items-center justify-center text-4xl mb-6">✓</div>
+                                <h3 className="text-2xl font-bold text-slate-900 mb-2">Mesajınız Alındı!</h3>
+                                <p className="text-slate-500 mb-6">En kısa sürede sizinle iletişime geçeceğiz.</p>
+                                <button onClick={() => setIsSubmitted(false)} className="text-[#00d061] font-bold hover:underline">
+                                    Yeni bir mesaj gönder
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">Ad Soyad</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder="Adınız ve Soyadınız"
+                                            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] transition-all"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">E-posta Adresi</label>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="ornek@mail.com"
+                                            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] transition-all"
+                                        />
+                                    </div>
                                 </div>
+
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 mb-2">E-posta Adresi</label>
-                                    <input
-                                        type="email"
-                                        placeholder="ornek@mail.com"
-                                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all"
-                                    />
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">Konu</label>
+                                    <select
+                                        value={subject}
+                                        onChange={(e) => setSubject(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] transition-all bg-white cursor-pointer"
+                                    >
+                                        <option value="İlk Danışmanlık">İlk Danışmanlık</option>
+                                        <option value="Randevu İptali / Değişikliği">Randevu İptali / Değişikliği</option>
+                                        <option value="Genel Bilgi">Genel Bilgi</option>
+                                    </select>
                                 </div>
-                            </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-2">Konu</label>
-                                <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all bg-white cursor-pointer">
-                                    <option>İlk Danışmanlık</option>
-                                    <option>Randevu İptali / Değişikliği</option>
-                                    <option>Genel Bilgi</option>
-                                </select>
-                            </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">Mesajınız</label>
+                                    <textarea
+                                        required
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        rows={4}
+                                        placeholder="Size nasıl yardımcı olabiliriz?"
+                                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] transition-all resize-none"
+                                    ></textarea>
+                                </div>
 
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-2">Mesajınız</label>
-                                <textarea
-                                    rows={4}
-                                    placeholder="Size nasıl yardımcı olabiliriz?"
-                                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00d061] focus:border-transparent transition-all resize-none"
-                                ></textarea>
-                            </div>
-
-                            <button
-                                type="button"
-                                className="w-full bg-[#00d061] hover:bg-[#00b353] text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md"
-                            >
-                                <span>Mesajı Gönder</span>
-                                <span className="text-xl">→</span>
-                            </button>
-                        </form>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-[#00d061] hover:bg-[#00b353] disabled:bg-slate-300 text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-md"
+                                >
+                                    <span>{isSubmitting ? "Gönderiliyor..." : "Mesajı Gönder"}</span>
+                                    {!isSubmitting && <span className="text-xl">→</span>}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
 

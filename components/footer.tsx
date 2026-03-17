@@ -41,7 +41,7 @@ export default function Footer() {
                 <div>
                     <h4 className="font-bold text-slate-800 mb-4">İletişim</h4>
                     <ul className="space-y-2 text-sm text-slate-500">
-                        <li>📍 Uşak, Merkez</li>
+                        <li>📍 Uşak, Merkez </li>
                         <li>📞 +90 543 210 0276</li>
                         <li>✉️ veyisbozkurt2@gmail.com</li>
                     </ul>

@@ -1,3 +1,4 @@
+import Image from "next/image"; // Bunu eklemeyi unutma
 import Link from "next/link";
 
 export default function About() {
@@ -7,8 +8,13 @@ export default function About() {
 
                 <div className="flex flex-col md:flex-row gap-12 items-center">
                     {/* Fotoğraf Alanı */}
-                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-slate-200 overflow-hidden shrink-0 border-4 border-[#e5fbf0] flex items-center justify-center text-slate-400">
-                        [Veyis Bey Fotoğrafı]
+                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-slate-200 overflow-hidden shrink-0 border-4 border-[#e5fbf0] relative shadow-sm">
+                        <Image
+                            src="/images/veyis.jpeg"
+                            alt="Fizyoterapist Veyis Bozkurt"
+                            fill
+                            className="object-cover"
+                        />
                     </div>
 
                     {/* Metin Alanı */}
