@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Veyis Bozkurt Fizyoterapi | Özel SMHB",
-    description: "Turgutlu fizyoterapi, manuel terapi ve sağlıklı yaşam merkezi.",
+    description: "Uşak fizyoterapi, manuel terapi ve sağlıklı yaşam merkezi.",
 };
 
 export default function RootLayout({
