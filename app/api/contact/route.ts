@@ -11,6 +11,7 @@ export async function POST(request: Request) {
         const data = await resend.emails.send({
             from: '"FizyoCenter Iletisim Formu" <iletisim@fztveyisbozkurt.com>',
             to: ['mehmet.64.b@gmail.com', 'veyisbozkurt2@gmail.com'],
+            replyTo: email,
             subject: `Yeni Mesaj: ${subject}`,
             html: `
                 <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
