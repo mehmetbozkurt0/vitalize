@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
         const { data, error } = await resend.emails.send({
             from: '"FizyoCenter Randevu Sistemi" <iletisim@fztveyisbozkurt.com>',
-            to: ['mehmet.64.b@gmail.com', 'veyisbozkurt2@gmail.com'] ,
+            to: ['mehmet.64.b@gmail.com', 'veyisbozkurt2@gmail.com', 'iletisim@fztveyisbozkurt.com'] ,
             subject: '🚨 Yeni Randevu Talebi!',
             html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333;">
