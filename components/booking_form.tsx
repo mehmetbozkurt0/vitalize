@@ -27,6 +27,7 @@ export default function BookingForm() {
     const timeSlots = ["09:00", "10:00", "11:00", "13:30", "14:30", "15:30", "16:30", "17:30"];
 
     // Tarih her değiştiğinde Supabase'den o günün dolu saatlerini çek
+    // Tarih her değiştiğinde Güvenli API'den o günün dolu saatlerini çek
     useEffect(() => {
         if (!selectedDate) return;
 
@@ -35,18 +36,16 @@ export default function BookingForm() {
             setSelectedTime("");
 
             try {
-                const { data, error } = await supabase
-                    .from('appointments')
-                    .select('appointment_time')
-                    .eq('appointment_date', selectedDate)
-                    .neq('status', 'iptal');
+                // Supabase'e doğrudan gitmek yerine, kendi güvenli backend'imize istek atıyoruz
+                const response = await fetch(`/api/times?date=${selectedDate}`);
+                const result = await response.json();
 
-                if (error) throw error;
-
-                if (data) {
-                    const times = data.map(appt => appt.appointment_time);
-                    setBookedTimes(times);
+                if (!response.ok) {
+                    throw new Error(result.error || 'Saatler çekilemedi');
                 }
+
+                // API'den sadece saatler temiz bir dizi olarak geliyor, onları state'e kaydediyoruz
+                setBookedTimes(result.bookedTimes || []);
             } catch (error) {
                 console.error("Dolu saatler çekilemedi:", error);
             } finally {
