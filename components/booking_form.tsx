@@ -61,52 +61,46 @@ export default function BookingForm() {
         setIsSubmitting(true);
 
         try {
-            let patientId;
+      // 1. Doğrudan Supabase'e yazmak yerine yeni yazdığımız güvenli API'ye istek atıyoruz
+            const bookingResponse = await fetch('/api/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    phone,
+                    service: selectedService,
+                    date: selectedDate,
+                    time: selectedTime,
+                    notes
+                }),
+            });
 
-            const { data: existingPatients, error: searchError } = await supabase
-                .from('patients')
-                .select('id')
-                .eq('phone', phone);
+            const bookingResult = await bookingResponse.json();
 
-            if (searchError) throw searchError;
-
-            if (existingPatients && existingPatients.length > 0) {
-                patientId = existingPatients[0].id;
-            } else {
-                const { data: newPatient, error: insertPatientError } = await supabase
-                    .from('patients')
-                    .insert([{ first_name: firstName, last_name: lastName, phone: phone }])
-                    .select('id')
-                    .single();
-
-                if (insertPatientError) throw insertPatientError;
-                patientId = newPatient.id;
+            if (!bookingResponse.ok) {
+                throw new Error(bookingResult.error || 'Randevu kaydedilemedi.');
             }
 
-            const { error: insertApptError } = await supabase
-                .from('appointments')
-                .insert([{
-                    patient_id: patientId,
-                    service: selectedService,
-                    appointment_date: selectedDate,
-                    appointment_time: selectedTime,
-                    notes: notes
-                }]);
-
-            if (insertApptError) throw insertApptError;
-
+      // 2. Veritabanı kaydı başarılı olduktan sonra çalışan mevcut e-posta tetikleyicin
             await fetch('/api/email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    firstName, lastName, phone, service: selectedService, date: selectedDate, time: selectedTime
+                    firstName,
+                    lastName,
+                    phone,
+                    service: selectedService,
+                    date: selectedDate,
+                    time: selectedTime
                 }),
             });
 
+            // 3. Başarılı ekranına geçiş sağlayan mevcut state güncellemen
             setIsSubmitted(true);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Kayıt hatası:", error);
-            alert("Randevu kaydedilirken bir sorun oluştu. Lütfen tekrar deneyin.");
+            alert(error.message || "Randevu kaydedilirken bir sorun oluştu. Lütfen tekrar deneyin.");
         } finally {
             setIsSubmitting(false);
         }
