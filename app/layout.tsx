@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     title: "Uşak Fizyoterapist | Veyis Bozkurt Fizyoterapi Özel SMHB",
     description: "Uşak'ta uzman fizyoterapist. Manuel terapi, ortopedik ve nörolojik rehabilitasyon, klinik pilates. 9 yıllık deneyim, 1000+ danışan. Hemen randevu alın: 0543 210 02 76",
     keywords: "uşak fizyoterapist, uşak fizyoterapi, uşak manuel terapi, uşak rehabilitasyon, fizyoterapist uşak, uşak klinik pilates",
+    alternates: {
+        canonical: "https://www.fztveyisbozkurt.com",
+    },
 };
 
 export default function RootLayout({
