@@ -1,4 +1,10 @@
 import BookingForm from "@/components/booking_form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Online Randevu | Uşak Fizyoterapist Veyis Bozkurt",
+    description: "Uşak'ta fizyoterapi randevusu almak için online randevu sistemimizi kullanın. Hızlı ve kolay randevu.",
+};
 
 export default function BookingPage() {
     return (

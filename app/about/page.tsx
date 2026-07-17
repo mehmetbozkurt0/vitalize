@@ -1,5 +1,11 @@
-import Image from "next/image"; // Bunu eklemeyi unutma
+import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Hakkımızda | Uşak Fizyoterapist Veyis Bozkurt",
+    description: "9 yıllık deneyimi ve 1000+ danışanıyla Uşak'ın güvenilir fizyoterapi merkezi. Klinik uzmanlığı hasta odaklı yaklaşımla birleştiriyoruz.",
+};
 
 export default function About() {
     return (

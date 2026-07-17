@@ -16,7 +16,7 @@ export default function HomePage() {
               UZMAN FİZYOTERAPİ HİZMETLERİ
             </span>
               <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
-                Ağrısız Bir Yaşam İçin<br className="hidden md:block" />
+                Uşak Fizyoterapist |  Ağrısız Bir Yaşam İçin<br className="hidden md:block" />
                 <span className="text-[#00d061]">Doğru Hareket Edin</span>
               </h1>
               <p className="text-slate-600 text-lg mb-10 max-w-xl mx-auto lg:mx-0">

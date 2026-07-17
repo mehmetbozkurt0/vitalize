@@ -1,5 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Uşak Fizyoterapi Hizmetleri | Manuel Terapi, Rehabilitasyon, Pilates",
+    description: "Uşak'ta fizyoterapi, manuel terapi, ortopedik ve nörolojik rehabilitasyon, klinik pilates. Kişiye özel tedavi programları için hemen randevu alın.",
+};
 
 export default function ServicesPage() {
     const treatments = [
